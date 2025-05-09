@@ -7,6 +7,11 @@ from sqlalchemy import create_engine, or_, not_
 from sqlalchemy.orm import sessionmaker
 
 # declarative base class
+if sqlalchemy.__version__ == "1.2.19":
+    from sqlalchemy.ext.declarative import declarative_base
+
+    Base = declarative_base()
+
 if sqlalchemy.__version__.startswith("1."):
     from sqlalchemy.orm import declarative_base
 
