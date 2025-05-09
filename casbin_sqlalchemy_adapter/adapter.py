@@ -12,7 +12,7 @@ if sqlalchemy.__version__ == "1.2.19":
 
     Base = declarative_base()
 
-if sqlalchemy.__version__.startswith("1."):
+elif sqlalchemy.__version__.startswith("1."):
     from sqlalchemy.orm import declarative_base
 
     Base = declarative_base()
