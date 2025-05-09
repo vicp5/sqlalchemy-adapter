@@ -46,7 +46,7 @@ class Filter:
 class Adapter(persist.Adapter, persist.adapters.UpdateAdapter):
     """the interface for Casbin adapters."""
 
-    def __init__(self, engine, db_class=None, filtered=False):
+    def __init__(self, engine, db_class=None, filtered=False, create_all_models=True):
         if isinstance(engine, str):
             self._engine = create_engine(engine)
         else:
@@ -72,7 +72,8 @@ class Adapter(persist.Adapter, persist.adapters.UpdateAdapter):
         self._db_class = db_class
         self.session_local = sessionmaker(bind=self._engine)
 
-        Base.metadata.create_all(self._engine)
+        if create_all_models:
+            Base.metadata.create_all(self._engine)
         self._filtered = filtered
 
     @contextmanager
